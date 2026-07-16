@@ -1,4 +1,4 @@
-name: Validate Project
+name: فحص المشروع
 
 on:
   pull_request:
@@ -15,5 +15,4 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run lint
-      - run: npm run build:client
+      - run: npm run build

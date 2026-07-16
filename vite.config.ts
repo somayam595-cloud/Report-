@@ -1,23 +1,20 @@
 import react from '@vitejs/plugin-react';
-import path from 'node:path';
 import { defineConfig } from 'vite';
 
+function githubPagesBase(): string {
+  if (process.env.GITHUB_ACTIONS !== 'true') return './';
+  const repository = process.env.GITHUB_REPOSITORY?.split('/')[1];
+  return repository ? `/${repository}/` : '/';
+}
+
 export default defineConfig({
-  // المسارات النسبية تجعل البناء يعمل على GitHub Pages مهما كان اسم المستودع.
-  base: './',
+  base: githubPagesBase(),
   plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, '.'),
-    },
-  },
-  server: {
-    hmr: process.env.DISABLE_HMR !== 'true',
-    watch: process.env.DISABLE_HMR === 'true' ? null : {},
-  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    sourcemap: true,
+    sourcemap: false,
+    target: 'es2020',
+    chunkSizeWarningLimit: 1100,
   },
 });

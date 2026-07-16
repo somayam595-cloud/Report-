@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  html {
+    direction: rtl;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background: #f7f9fc;
+    font-family: 'Tajawal', Arial, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .card-shell {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+  }
+
+  .field-control {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-teal focus:ring-4 focus:ring-teal/10;
+  }
+
+  .toolbar-button {
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-3 py-2 text-xs font-black transition sm:px-4 sm:text-sm;
+  }
+
+  .secondary-button {
+    @apply inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-extrabold text-slate-700 transition hover:bg-slate-200;
+  }
+
+  .smart-button {
+    @apply flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-teal-dark via-teal to-sky-500 px-4 py-3.5 text-sm font-black text-white shadow-lg shadow-teal/20 transition hover:brightness-105 disabled:cursor-wait disabled:opacity-60;
+  }
+
+  .section-heading {
+    @apply flex items-center justify-between gap-3 border-b border-slate-100 pb-4;
+  }
+
+  .section-heading h2 {
+    @apply text-base font-black text-ink sm:text-lg;
+  }
+
+  .section-kicker {
+    @apply mb-0.5 text-[10px] font-black uppercase tracking-wider text-teal-dark;
+  }
+
+  .upload-zone {
+    @apply flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-5 py-8 text-center transition hover:border-teal hover:bg-teal/5;
+  }
+
+  .report-paper {
+    width: min(100%, 794px);
+    min-height: 1123px;
+  }
+
+  .report-content {
+    padding: 32px 38px 28px;
+  }
+
+  .report-section {
+    @apply rounded-2xl border border-slate-200 bg-white p-4;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-section-title {
+    @apply mb-2.5 flex items-center gap-2 text-sm font-black text-ink;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+.report-sidebar,
+.preview-column {
+  min-width: 0;
+}
+
+.pdf-export-target {
+  width: 794px !important;
+  max-width: 794px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border: 0 !important;
+}
+
+.pdf-export-target .report-content {
+  padding: 28px 32px 24px !important;
+}
+
+@media (max-width: 639px) {
+  .report-content {
+    padding: 24px 20px 22px;
+  }
+
+  .report-paper {
+    min-height: 0;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 7mm;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  body {
+    color: #000 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .workspace {
+    display: block !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .preview-column {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .report-paper {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+
+  .report-content {
+    padding: 5mm 6mm 4mm !important;
+  }
+
+  .report-info-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .report-section,
+  .avoid-break,
+  figure {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+}

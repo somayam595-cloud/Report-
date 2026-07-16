@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: نشر المنصة على GitHub Pages
 
 on:
   push:
@@ -18,28 +18,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: جلب ملفات المستودع
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: إعداد Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
+      - name: تثبيت الحزم
         run: npm ci
 
-      - name: Type check
-        run: npm run lint
+      - name: فحص وبناء المشروع
+        run: npm run build
 
-      - name: Build static site
-        run: npm run build:client
-
-      - name: Setup Pages
+      - name: إعداد GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload Pages artifact
+      - name: رفع ملفات الموقع
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -51,6 +48,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
+      - name: نشر الموقع
         id: deployment
         uses: actions/deploy-pages@v4

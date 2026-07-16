@@ -1,20 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Tajawal', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Tajawal', 'Arial', 'sans-serif'],
         serif: ['Amiri', 'Georgia', 'serif'],
       },
       colors: {
-        deep: '#0a1628',
-        navy: '#0d2240',
-        gold: '#c9a84c',
-        'gold-light': '#f0d080',
-        teal: '#0e7490',
-        'teal-light': '#22d3ee',
-        'off-white': '#f8fafc',
+        ink: '#0b1f35',
+        navy: '#102a43',
+        teal: '#178f9f',
+        'teal-dark': '#0d6f7b',
+        gold: '#c7a246',
+        paper: '#f7f9fc',
+      },
+      boxShadow: {
+        soft: '0 14px 40px rgba(15, 42, 67, 0.10)',
       },
     },
   },
