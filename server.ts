@@ -4,19 +4,15 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 
+dotenv.config({ path: '.env.local' });
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT || 3000);
 
 // Increase limit to handle base64 image uploads in templates
 app.use(express.json({ limit: "25mb" }));
 app.use(express.urlencoded({ limit: "25mb", extended: true }));
-
-// Serve logo.png directly from workspace root directory to ensure it loads flawlessly
-app.get("/logo.png", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "logo.png"));
-});
 
 let aiInstance: GoogleGenAI | null = null;
 
@@ -126,7 +122,7 @@ app.post("/api/generate", async (req, res) => {
 ${programField ? `مجال البرنامج الحالي: "${programField}"` : "المجال: غير محدد، يرجى اقتراحه بناءً على اسم البرنامج"}`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: process.env.GEMINI_MODEL || "gemini-3.5-flash",
       contents: prompt,
       config: {
         systemInstruction,

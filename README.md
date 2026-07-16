@@ -1,20 +1,62 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# منصة تقارير البرامج المدرسية
 
-# Run and deploy your AI Studio app
+مشروع React + TypeScript + Vite باللغة العربية، جاهز للرفع إلى GitHub وتشغيله بطريقتين:
 
-This contains everything you need to run your app locally.
+1. **GitHub Pages:** نسخة ثابتة تعمل مباشرة، وتستخدم مولداً محلياً احتياطياً لصياغة الأهداف والخطوات.
+2. **استضافة Node.js:** تشغّل خادم Express وتتيح استخدام Gemini من خلال مفتاح سري على الخادم.
 
-View your app in AI Studio: https://ai.studio/apps/a5f61c2f-6b2e-4ad6-9831-f3c0212aa207
+## التشغيل محلياً
 
-## Run Locally
+يتطلب المشروع Node.js 20 أو أحدث.
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+cp .env.example .env.local
+npm run dev
+```
 
+يفتح التطبيق افتراضياً على:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```text
+http://localhost:3000
+```
+
+## النشر على GitHub Pages
+
+1. أنشئي مستودعاً جديداً في GitHub.
+2. ارفعي **محتويات هذا المجلد** إلى الفرع `main`.
+3. افتحي: `Settings` ثم `Pages`.
+4. عند `Source` اختاري `GitHub Actions`.
+5. انتظري اكتمال مهمة **Deploy GitHub Pages** في تبويب `Actions`.
+
+تم ضبط `vite.config.ts` على مسارات نسبية؛ لذلك لا يلزم إدخال اسم المستودع داخل الإعدادات.
+
+> GitHub Pages لا يشغّل خادم Express ولا يحفظ مفتاح Gemini. عند النشر عليه يستخدم التطبيق الصياغة المحلية الاحتياطية تلقائياً، بينما تبقى جميع وظائف إدخال البيانات والحفظ والطباعة وPDF والنسخ الاحتياطي متاحة.
+
+## تشغيل Gemini على استضافة Node.js
+
+ضعي متغير البيئة التالي في لوحة الاستضافة، ولا تضعي المفتاح داخل ملفات GitHub:
+
+```text
+GEMINI_API_KEY=your_secret_key
+```
+
+ثم استخدمي:
+
+```bash
+npm ci
+npm run build
+npm start
+```
+
+## أهم الملفات
+
+- `App.tsx`: واجهة المنصة.
+- `server.ts`: خادم Express ومسار Gemini.
+- `public/logo.png`: الشعار.
+- `.github/workflows/deploy-pages.yml`: النشر التلقائي إلى Pages.
+- `.env.example`: مثال آمن لمتغيرات البيئة.
+
+## الأمان
+
+ملفات `.env` الحقيقية مستبعدة من Git عبر `.gitignore`. لا ترفعي مفتاح Gemini أو أي بيانات سرية إلى المستودع.
